@@ -25,14 +25,17 @@ print("You have a maximum of 8 points to distribute.")
 time.sleep(1)
 print("You may only at a maximum have 6 points in either stat.")
 
+def input_clamp(stat_name, prompt, clamp = 6):
+    while player_horse[stat_name] < 1 or player_horse[stat_name] > clamp:
+        player_horse[stat_name] = input_int(prompt)
+    return 0
+
 stats_ok = False
 
 while stats_ok == False:
-    while player_horse["speed"] < 1 or player_horse["speed"] > 6:
-        player_horse["speed"] = input_int("Enter your horse's speed (max 6): ")
-    while player_horse["agility"] < 1 or player_horse["agility"] > 6:
-        player_horse["agility"] = input_int("Enter your horse's agility (max 6): ")
-    
+    input_clamp("speed", "Enter your horse's speed (max 6): ")
+    input_clamp("agility", "Enter your horse's agility (max 6): ")
+
     if player_horse["speed"] + player_horse["agility"] == 8:
         stats_ok = True
     else:
